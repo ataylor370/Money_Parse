@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/DjangoProject2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="Base file">
+      <change afterPath="$PROJECT_DIR$/Money_Parse/Templates/Home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Money_Parse/Templates/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CS2340_Project_2/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CS2340_Project_2/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,14 +38,25 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django Server.DjangoProject2.executor": "Debug",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="DjangoProject2" type="Python.DjangoServer" factoryName="Django server">
       <module name="DjangoProject2" />
@@ -43,6 +65,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="CS2340_Project_2.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -77,11 +100,32 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743616968195</updated>
-      <workItem from="1743616969162" duration="140000" />
+      <workItem from="1743616969162" duration="3926000" />
     </task>
+    <task id="LOCAL-00001" summary="Base file">
+      <option name="closed" value="true" />
+      <created>1743617381722</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1743617381722</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Base file">
+      <option name="closed" value="true" />
+      <created>1743617391424</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1743617391424</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Base file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Base file" />
   </component>
 </project>
