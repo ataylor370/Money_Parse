@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('', include('Money_parse.urls')),
     path('admin/', admin.site.urls),
     path('about/',include('Money_Parse.urls'))
 ]
