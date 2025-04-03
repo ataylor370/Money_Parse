@@ -1,0 +1,46 @@
+/* theme colors */
+:root {
+    --theme_light_green: #D2FFEB;
+    --theme_dark_green: #0B8C2C;
+    --theme_black: #090909;
+    --theme_blue: #32ADE6;
+    --theme_grey_fill: #FFFFFF; /* different color due to transparency */
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;  /* Regular weight */
+    font-size: 16px;   /* Default size for body text */
+    line-height: 1.5;  /* Improve readability */
+}
+
+/* Heading 1: Large font, bold */
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;  /* Bold weight */
+    font-size: 36px;   /* Larger size for headers */
+    margin-bottom: 20px;  /* Space below the header */
+}
+
+/* Heading 2: Slightly smaller than h1 */
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;  /* Bold weight */
+    font-size: 28px;   /* Medium size */
+    margin-bottom: 15px;
+}
+
+/* Subheading: Lighter weight */
+h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;  /* Regular weight */
+    font-size: 22px;   /* Subheading size */
+    margin-bottom: 10px;
+}
+
+/* Paragraph text: Default text */
+p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;  /* Regular weight */
+    font-size: 16px;   /* Default size */
+    margin-bottom: 12px;
+}
