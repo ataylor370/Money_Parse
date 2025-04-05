@@ -17,16 +17,16 @@ body {
 h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;  /* Bold weight */
-    font-size: 36px;   /* Larger size for headers */
-    margin-bottom: 20px;  /* Space below the header */
+    font-size: 40px;   /* Larger size for headers */
+    margin-bottom: 0px;  /* Space below the header */
 }
 
 /* Heading 2: Slightly smaller than h1 */
 h2 {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;  /* Bold weight */
-    font-size: 28px;   /* Medium size */
-    margin-bottom: 15px;
+    font-size: 35px; ;  /* Medium size */
+    margin-bottom: 0px;
 }
 
 /* Subheading: Lighter weight */
@@ -41,6 +41,7 @@ h3 {
 p {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;  /* Regular weight */
-    font-size: 16px;   /* Default size */
+    font-size: 23px;   /* Default size */
+    margin-top: 0px;
     margin-bottom: 12px;
 }

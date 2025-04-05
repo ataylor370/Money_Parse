@@ -19,17 +19,28 @@ body {
     padding: 15px 32px;
     text-align: center;
     display: inline-block;
-    font-size: 16px;
+    font-size: 28px;
+
+    /* font */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;  /* Regular weight */
+    font-size: 23px;   /* Default size */
+    margin-top: 0px;
+    margin-bottom: 12px;
 }
 .create_account_button {
+
     position: absolute;
     top: 425px;
     left: 90px;
     width: 366px;
     height: 104px;
     border: thin solid #090909;
+
+
 }
 .sign_in_button {
+
     position: absolute;
     top: 550px;
     left: 90px;
@@ -41,15 +52,14 @@ body {
     width: 100%;               /* Make sure it stretches to the full width of the parent */
     height: 100%;
 
-    font-size: 27px;
     color:var(--theme_black);
     display: flex; /* Center text using flexbox */
     justify-content: center;  /* Center horizontally */
     align-items: center;     /* Center vertically */
     flex-direction: column; /* stack text on top of each other */
     z-index: 1; /* essientially defines layer */
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 .glassmorphic-box::before {
     content: "";
@@ -66,8 +76,14 @@ body {
 }
 .about_textbox {
     position: absolute;
-    top: 113px;
-    left: 599px;
+    top: 200px;
+    left: 569px;
     width: 787px;
-    height: 570px;
+    height: 450px;
+}
+.what_we_do {
+    color: var(--theme_dark_green);
+    position: absolute;
+    top: 90px;
+    left: 610px;
 }
