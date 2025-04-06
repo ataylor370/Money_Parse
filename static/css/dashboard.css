@@ -1,0 +1,112 @@
+body {
+    background-color: var(--theme_light_green);
+    padding: 40px;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 40px;
+}
+
+.top-section {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    border: thin solid var(--theme_black);
+    border-radius: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    flex: 1;
+    min-width: 400px;
+}
+
+.transactions-card {
+    flex: 2;
+    min-width: 600px;
+}
+
+.budget-card {
+    flex: 1;
+    min-width: 400px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    color: var(--theme_black);
+    font-size: 15px;
+}
+
+.progress-row {
+    margin-bottom: 20px;
+}
+
+.label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: var(--theme_black);
+}
+
+.progress-bar {
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 16px;
+}
+
+.progress-fill {
+    background: linear-gradient(to right, var(--theme_dark_green), var(--theme_blue));
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.tips-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tips-card li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: thin solid #ccc;
+    color: var(--theme_black);
+    font-size: 14px;
+}
+
+.dot {
+    margin-right: 10px;
+    font-weight: bold;
+    color: var(--theme_dark_green);
+}
+
+.info-icon {
+    background-color: var(--theme_light_green);
+    color: var(--theme_black);
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    border: thin solid var(--theme_black);
+    font-size: 12px;
+}
