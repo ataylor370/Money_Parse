@@ -19,7 +19,7 @@ class transaction_manager:
      def __init__(self):
           self.transactions = []
      def create_transaction(self, category, name, amount, date, transaction_number):
-          self.transactions.append(transaction(category, name, amount, date, transaction_number))
+          self.transactions.append(transaction(category, name, amount, date, transaction_number)) #line fix to add new transaction to database
      def delete_transaction(self, transaction_number):
           for transaction in self.transactions:
               if transaction.transaction_number == transaction_number:
