@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/Defaults.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <div class="top-section">
+        <div class="card transactions-card">
+            <h2>Weekly Transactions</h2>
+            <table>
+                <thead>
+                    <tr><th>Category</th><th>Expense</th><th>Amount</th><th>Date</th></tr>
+                </thead>
+                <tbody>
+                {% for t in transactions %}
+                    <tr>
+                        <td>{{ t.category.name }}</td>
+                        <td>{{ t.description }}</td>
+                        <td>${{ t.amount }}</td>
+                        <td>{{ t.date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card budget-card">
+            <h2>Weekly Budget</h2>
+            {% for cat in category_data %}
+                <div class="progress-row">
+                    <div class="label">
+                        {{ cat.name }}: ${{ cat.spent }} / ${{ cat.budget }}
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ cat.percent }}%;"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="card tips-card">
+        <h2>Quick tips</h2>
+        <ul>
+            <li>
+                <span class="dot">*</span> You’re nearing your $300 grocery budget—plan meals and stick to a list to stay on track.
+                <span class="info-icon">i</span>
+            </li>
+            <li>
+                <span class="dot">*</span> Leisure spending is at $72.99 of $100—track expenses to avoid overspending.
+                <span class="info-icon">i</span>
+            </li>
+            <li>
+                <span class="dot">*</span> Food budget has room left at $23.47 of $55—consider reallocating or adjusting as needed.
+                <span class="info-icon">i</span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>
