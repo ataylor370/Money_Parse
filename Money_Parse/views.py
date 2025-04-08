@@ -1,39 +1,51 @@
-import datetime
-from django.shortcuts import render
 from .models import Transaction, Category
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+import datetime
 def home(request):
      return render(request,'home.html',{})
 def about(request):
      return render(request, 'about.html',{}) #brackets at the end allow us to pass in stuff during render
-# Create your views here.
-class transaction:
-     def __init__(self, category, name, amount, date, transaction_number):
-          self.category = category
-          self.name = name
-          self.amount = amount
-          self.date = date
-          self.transaction_number = f"T{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}"
-     def __repr__(self):
-          return f"Transaction(transaction_number={self.transaction_number}, category='{self.category}', amount={self.amount})" #Not sure where use case for string representation is yet but its here just in case
+# methods for transaction database modification
+def create_transaction(request):
+     if request.method == "POST":
+          Transaction.objects.create(
+               user = request.user,
+               category = request.POST['category'],
+               name = request.POST['name'],
+               amount = request.POST['amount'],
+               date = request.POST['date'],
+          )
+          #return methods set to the main screen transaction template
+         return redirect("main_transaction_template") #shouldnt redirect anywhere if on main screen
+def edit_transaction(request, transaction_number):
+    transaction = get_object_or_404(Transaction, id = transaction_number)
+    if request.method == "POST":
+         transaction.category = request.POST['category']
+         transaction.name = request.POST['name']
+         transaction.amount = request.POST['amount']
+         transaction.date = request.POST['date'] #note: although the date changes the transaction number wouldn't change
 
-class transaction_manager:
-     def __init__(self):
-          self.transactions = []
-     def create_transaction(self, category, name, amount, date, transaction_number):
-          self.transactions.append(transaction(category, name, amount, date, transaction_number)) #line fix to add new transaction to database
-     def delete_transaction(self, transaction_number):
-          for transaction in self.transactions:
-              if transaction.transaction_number == transaction_number:
-                   self.transactions.remove(transaction)
-     def edit_transaction(self, new_category, new_name, new_amount, new_date, transaction_number):
-          for transaction in self.transactions:
-               if transaction.transaction_number == transaction_number:
-                    transaction.category = new_category
-                    transaction.name = new_name
-                    transaction.amount = new_amount
-                    transaction.date = new_date
-     def get_tranasactions(self):
-          return self.transactions
+def delete_transaction(request, transaction_number):
+     transaction = get_object_or_404(Transaction, id = transaction_number, user = request.user)
+     if request.method == "POST":
+          transaction.delete()
+          return redirect("transactions_expanded") # expanded page for transactions
+
+# methods for category database modification
+def create_category(request):
+     if request.method == "POST":
+          Category.objects.create(
+               name = request.POST['name'],
+          )
+def delete_category(request, category_name):
+     category = get_object_or_404(Category, name = category_name)
+     if request.method == "POST":
+          category.delete()
+          return redirect("budget_expanded") #expanded page for budget
+
+
+
 
 class category:
      def __init__(self, name):
