@@ -1,9 +1,10 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 class Transaction(models.Model): #blueprint for the transactions database
     # Sets up relationship between transaction and user; if user is deleted, so are their transacatins
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     #defines database to include category, name, amount, and date fields
     category = models.CharField(max_length=150)
     name = models.CharField(max_length=150)

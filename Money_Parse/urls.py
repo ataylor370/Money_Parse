@@ -1,7 +1,10 @@
-from django.urls import path
+from django.urls import path,include
+
+import accounts
 from . import views
 urlpatterns = [
-    path('', views.dashboard, name='dashboard'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('home/',views.home,name='home'),
-    path('about/',views.about,name='about'),
+    path('',views.about,name='about'),
+    path('account/', include('accounts.urls')),
 ]

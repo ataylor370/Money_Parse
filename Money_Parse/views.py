@@ -17,7 +17,7 @@ def create_transaction(request):
                date = request.POST['date'],
           )
           #return methods set to the main screen transaction template
-         return redirect("main_transaction_template") #shouldnt redirect anywhere if on main screen
+         #return redirect("main_transaction_template") #shouldnt redirect anywhere if on main screen
 def edit_transaction(request, transaction_number):
     transaction = get_object_or_404(Transaction, id = transaction_number)
     if request.method == "POST":
