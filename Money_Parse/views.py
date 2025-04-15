@@ -48,8 +48,12 @@ def delete_category(request, category_name):
 
 
 class category:
-     def __init__(self, name):
-          self.name = name
+     def __init__(self, name,budget):
+         self.name = name
+         self.budget = budget
+         self.spent = 0
+
+
      def __repr__(self):
           return f"Category(name={self.name})" #Not sure where use case for string representation is yet but its here just in case
 
@@ -57,8 +61,9 @@ class category:
 class category_manager:
      def __init__(self):
           self.categories = []
-     def create_category(self, name):
-          self.categories.append(category(name))
+     def create_category(self, name,budget):
+          self.categories.append(category(name,budget))
+
      def delete_category(self, name):
           for category in self.categories:
                if category.name == name:
@@ -74,11 +79,10 @@ def dashboard(request):
 
     category_data = []
     for cat in categories:
-        spent = sum(t.amount for t in cat.transaction_set.all())
         category_data.append({
             'name': cat.name,
             'budget': cat.budget,
-            'spent': spent,
+            'spent': cat.spent,
         })
 
     return render(request, 'dashboard.html', {
