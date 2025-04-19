@@ -25,11 +25,55 @@ body {
     padding: 30px;
     flex: 1;
     min-width: 400px;
+    color: #0B8C2C;
 }
 
 .transactions-card {
     flex: 2;
     min-width: 600px;
+}
+.forms_container {
+    appearance: none;
+    width: 165px;
+    height: 35px;
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+}
+.forms_container-submit {
+    position: relative;
+    top: 0px;
+    left: 78px;
+    appearance: none;
+    width: 165px;
+    height: 35px;
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+}
+/* makes the placeholder text grey */
+select.forms_container {
+    color: #A9A9A9;
+    transition: background-color 0.5s ease;
+}
+button.forms_container-submit:hover {
+    border-style: solid !important;
+    border-width: 3px !important;
+    border-color: #0B8C2C !important;
+    transition: background-color 0.5s ease;
+}
+input:focus, select:focus {
+    outline: none;
+    border-style: solid !important;
+    border-width: 3px !important;
+    border-color: #0B8C2C !important;
+    transition: background-color 0.3s ease;
 }
 
 .budget-card {

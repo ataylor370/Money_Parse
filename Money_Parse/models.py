@@ -1,16 +1,20 @@
 from django.db import models
 import datetime
+from django.contrib.auth.models import User
 
+def get_unnamed_user():
+    user, created = User.objects.get_or_create(username='unnamed')
+    return user.id
 # Create your models here.
 class Transaction(models.Model): #blueprint for the transactions database
     # Sets up relationship between transaction and user; if user is deleted, so are their transacatins
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default = get_unnamed_user)
     #defines database to include category, name, amount, and date fields
     category = models.ForeignKey('Category', on_delete=models.CASCADE);
     name = models.CharField(max_length=150,default = 'unnamed')
     amount = models.DecimalField(max_digits = 10, decimal_places = 2)
     date = models.DateField()
-    transaction_number = models.CharField(max_length = 20, blank = True) # shouldnt blank be false
+    transaction_number = models.CharField(max_length = 20, blank = False) # shouldnt blank be false
 
     #saves the transaction number when transaction object is created.
     def save(self, *args, **kwargs):
@@ -21,6 +25,7 @@ class Transaction(models.Model): #blueprint for the transactions database
         return f'category: {self.category} name: {self.name} amount: {self.amount} date: {self.date} transaction number: {self.transaction_number}  '
 
 class Category(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
     name = models.CharField(max_length=150)
     budget = models.DecimalField(max_digits = 10, decimal_places = 2)
     @ property
@@ -28,3 +33,28 @@ class Category(models.Model):
         return sum(t.amount for t in self.transaction_set.all())
     def __str__(self):
         return f'name: {self.name} budget: {self.budget} spent: {self.spent}'
+
+class Goal(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
+    goal = models.TextField()
+    number = models.IntegerField()
+    #creating an incrementing goal number for each goal
+    def save(self, *args, **kwargs):
+        # If it's a new goal, set the goal_number
+        if self.goal_number is None:
+            last_goal = Goal.objects.filter(user=self.user).order_by('-goal_number').first()
+            if last_goal:
+                self.goal_number = last_goal.goal_number + 1
+            else:
+                self.goal_number = 1  # Start from 1 for the first goal
+        super().save(*args, **kwargs)
+
+class Exspenses(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
+    expense = models.CharField(max_length = 150)
+    amount = models.DecimalField(max_digits = 10, decimal_places = 2)
+
+class Incomes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
+    income = models.CharField(max_length = 150)
+    amount = models.DecimalField(max_digits = 10, decimal_places = 2)

@@ -1,0 +1,55 @@
+body {
+    background-color: var(--theme_light_green);
+}
+.glassmorphic-box{
+    position:relative;
+    width: 100% !important;               /* Make sure it stretches to the full width of the parent */
+    height: 100% !important;
+
+    color:var(--theme_black);
+    display: flex; /* Center text using flexbox */
+    flex-direction: column; /* stack text on top of each other */
+    z-index: 1; /* essientially defines layer */
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-top:1.5% ;
+    padding-bottom:1.5% ;
+
+}
+.glassmorphic-box::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: thin solid #090909;
+    backdrop-filter: blur();
+    border-radius: 100px;
+}
+.Goals_textbox {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 350px;
+    height: 330px;
+}
+.Discretionary_textbox {
+    position: absolute;
+    top: 455px;
+    left: 50px;
+    width: 350px;
+    height: 330px;
+}
+.Budget_textbox {
+    position: absolute;
+    top: 110px;
+    left: 569px;
+    width: 787px;
+    height: 600px;
+}
+.Green_text {
+    color: var(--theme_dark_green)
+}

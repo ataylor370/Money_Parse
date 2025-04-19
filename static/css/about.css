@@ -46,6 +46,18 @@ body {
     left: 90px;
     width: 366px;
     height: 104px;
+    border: thin solid #090909;
+}
+
+.sign_in_button:hover {
+    background-color: #0A7A26;
+    transition: background-color 0.3s ease;/* Change background on hover */
+}
+
+/* Hover Effect for Create Account Button */
+.create_account_button:hover {
+    background-color: #0A7A26;
+    transition: background-color 0.3s ease;/* Change background on hover */
 }
 .glassmorphic-box{
     position:relative;

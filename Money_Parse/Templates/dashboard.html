@@ -3,9 +3,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <!-- Poppins font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <title>Dashboard</title>
-    <link rel="stylesheet" href="{% static 'css/Defaults.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Defaults.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}?v=1">
 </head>
 <body>
 
@@ -14,12 +20,29 @@
     <div class="top-section">
         <div class="card transactions-card">
             <h2>Weekly Transactions</h2>
+            <!-- Logic fro adding transactions -->
+            <form method = "post" action = "/add-transaction/" >
+                <!-- dropdown menu for category - default text "Category -->
+                <select name="category" id="category"  class = "forms_container" required >
+                    <option value="" disabled selected hidden >Category</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat.name }}">{{ cat.name }}</option>
+                    {% endfor %}
+                </select>
+                <!-- text box for name - default text "Exspense" -->
+                <input type = "text" id = "description" name ="description" placeholder="Expense" class = "forms_container" required>
+                <!-- (numerical) text box for amount - default text "Amount" -->
+                <input type = "number" id = "amount" name = "amount" step = "0.01" min = "0" placeholder= "Amount" class = "forms_container" required>
+                <button type = "submit" class = "forms_container-submit"> Add Transaction </button>
+            </form>
+
+
             <table>
                 <thead>
                     <tr><th>Category</th><th>Expense</th><th>Amount</th><th>Date</th></tr>
                 </thead>
                 <tbody>
-                {% for t in transactions %}
+                {% for t in transactions|slice:":7" %} <!-- print only the first 7 -->
                     <tr>
                         <td>{{ t.category.name }}</td>
                         <td>{{ t.description }}</td>

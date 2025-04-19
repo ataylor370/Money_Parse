@@ -32,9 +32,9 @@ h2 {
 /* Subheading: Lighter weight */
 h3 {
     font-family: 'Poppins', sans-serif;
-    font-weight: 400;  /* Regular weight */
-    font-size: 22px;   /* Subheading size */
-    margin-bottom: 10px;
+    font-weight: 700;  /* Regular weight */
+    font-size: 28px;   /* Subheading size */
+    margin-bottom: 0px;
 }
 
 /* Paragraph text: Default text */

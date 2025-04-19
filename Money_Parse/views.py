@@ -1,4 +1,4 @@
-from .models import Transaction, Category
+from .models import Transaction, Category, Exspenses, Goal, Incomes
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 import datetime
@@ -6,76 +6,16 @@ def home(request):
      return render(request,'home.html',{})
 def about(request):
      return render(request, 'about.html',{}) #brackets at the end allow us to pass in stuff during render
-# methods for transaction database modification
-def create_transaction(request):
-     if request.method == "POST":
-          Transaction.objects.create(
-               user = request.user,
-               category = request.POST['category'],
-               name = request.POST['name'],
-               amount = request.POST['amount'],
-               date = request.POST['date'],
-          )
-          #return methods set to the main screen transaction template
-         #return redirect("main_transaction_template") #shouldnt redirect anywhere if on main screen
-def edit_transaction(request, transaction_number):
-    transaction = get_object_or_404(Transaction, id = transaction_number)
-    if request.method == "POST":
-         transaction.category = request.POST['category']
-         transaction.name = request.POST['name']
-         transaction.amount = request.POST['amount']
-         transaction.date = request.POST['date'] #note: although the date changes the transaction number wouldn't change
-
-def delete_transaction(request, transaction_number):
-     transaction = get_object_or_404(Transaction, id = transaction_number, user = request.user)
-     if request.method == "POST":
-          transaction.delete()
-          return redirect("transactions_expanded") # expanded page for transactions
-
-# methods for category database modification
-def create_category(request):
-     if request.method == "POST":
-          Category.objects.create(
-               name = request.POST['name'],
-          )
-def delete_category(request, category_name):
-     category = get_object_or_404(Category, name = category_name)
-     if request.method == "POST":
-          category.delete()
-          return redirect("budget_expanded") #expanded page for budget
-
-
-
-
-class category:
-     def __init__(self, name,budget):
-         self.name = name
-         self.budget = budget
-         self.spent = 0
-
-
-     def __repr__(self):
-          return f"Category(name={self.name})" #Not sure where use case for string representation is yet but its here just in case
-
-
-class category_manager:
-     def __init__(self):
-          self.categories = []
-     def create_category(self, name,budget):
-          self.categories.append(category(name,budget))
-
-     def delete_category(self, name):
-          for category in self.categories:
-               if category.name == name:
-                    self.categories.remove(category)
-
-
-# app/views.py
-
+def budget(request):
+    user = request.user
+    categories = Category.objects.filter(user=user)
+    goals = Goal.objects.filter(user=user)
+    return render(request, 'Budget.html', {'categories': categories, 'goals': goals})
 
 def dashboard(request):
-    categories = Category.objects.all()
-    transactions = Transaction.objects.all().order_by('-date')
+    user = request.user
+    categories = Category.objects.filter(user = user)
+    transactions = Transaction.objects.filter(user = user).order_by('-date')
 
     category_data = []
     for cat in categories:
@@ -89,3 +29,98 @@ def dashboard(request):
         'transactions': transactions,
         'category_data': category_data,
     })
+
+# methods for transaction database modification
+@login_required
+def create_transaction(request):
+     if request.method == "POST":
+          Transaction.objects.create(
+               user = request.user,
+               category = get_object_or_404(Category, id=request.POST['category'], user=request.user),
+               name = request.POST['name'],
+               amount = request.POST['amount'],
+               date = request.POST['date'],
+          )
+def edit_transaction(request, transaction_number):
+    transaction = get_object_or_404(Transaction, id = transaction_number, user = request.user)
+    if request.method == "POST":
+         transaction.category = request.POST['category']
+         transaction.name = request.POST['name']
+         transaction.amount = request.POST['amount']
+         transaction.date = request.POST['date'] #note: although the date changes the transaction number wouldn't change
+def delete_transaction(request, transaction_number):
+     transaction = get_object_or_404(Transaction, id = transaction_number, user = request.user)
+     if request.method == "POST":
+          transaction.delete()
+
+# methods for category database modification
+def create_category(request):
+     if request.method == "POST":
+          Category.objects.create(
+              user = request.user,
+              name = request.POST['name'],
+          )
+def delete_category(request, category_name):
+     category = get_object_or_404(Category, name = category_name, user = request.user)
+     if request.method == "POST":
+          category.delete()
+
+# methods for Goal database modification
+def create_goal(request, new_goal):
+    if request.method == "POST":
+        Goal.objects.create(
+            user = request.user,
+            goal = new_goal,
+        )
+def edit_goal(request, goal_number):
+    goal = get_object_or_404(Goal, id=goal_number, user=request.user)
+    if request.method == "POST":
+        goal.goal = request.POST['goal']
+def delete_goal(request, goal_number):
+    goal = get_object_or_404(Goal, id = goal_number, user = request.user)
+    if request.method == "POST":
+        goal.delete()
+    # renumbering goals after deletion made
+    remaining_goals = Goal.objects.filter(user=request.user).order_by('goal_number')
+    for idx, goal in enumerate(remaining_goals, start=1):
+        goal.goal_number = idx
+        goal.save()
+
+
+# methods for exspense database modification
+def create_exspense(request, exspense, amount):
+    if request.method == "POST":
+        Exspenses.objects.create(
+            user = request.user,
+            exspense = exspense,
+            amount = amount,
+        )
+def edit_exspense(request, exspense, amount ):
+    exspense = get_object_or_404(Exspenses, id = exspense, user = request.user)
+    if request.method == "POST":
+        exspense.amount = request.POST['amount']
+def delete_exspense(request, exspense):
+    exspense = get_object_or_404(Exspenses, id = exspense, user = request.user)
+    if  request.method == "POST":
+        exspense.delete()
+
+# methods for income database modification
+def create_income(request, income, amount):
+    if request.method == "POST":
+        Incomes.objects.create(
+            user = request.user,
+            income = income,
+            amount = amount,
+        )
+def edit_income(request, income):
+    income = get_object_or_404(Incomes, id = income, user = request.user)
+    if request.method == "POST":
+        income.amount = request.POST['amount']
+def delete_income(request, income):
+    income = get_object_or_404(Incomes, id = income, user = request.user)
+    if request.method == "POST":
+        income.delete()
+# app/views.py
+
+
+

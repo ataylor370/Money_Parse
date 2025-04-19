@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel = "stylesheet" href = "{% static 'css/budget.css' %}?v=1.4" >
+    <link rel = "stylesheet" href = "{% static 'css/Defaults.css' %}?v=1.4" >
+    <title>Budget</title>
+</head>
+<body>
+    <div class = "Goals_textbox">
+        <div class = "glassmorphic-box">
+            <h1 class="Green_text"> Goals </h1>
+            {% for goal in goals  %}
+                <p>{{goal}}</p>
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class = "Discretionary_textbox">
+        <div class = "glassmorphic-box">
+             <h3 class="Green_text"> Discretionary Spending </h3>
+            <table>
+                <thead>
+                    <tr><th>Category</th><th>Percentage</th><th>Amount</th></tr>
+                </thead>
+                <tbody>
+                {% for cat in categories %}
+                    <tr>
+                        <td>{{ cat.name }}</td>
+                        <td>{{ cat.percentage }}</td>
+                        <td>${{ cat.budget }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class = "Budget_textbox">
+        <div class = "glassmorphic-box">
+            <h1 class="Green_text"> Budget </h1>
+        </div>
+    </div>
+
+</body>
+</html>
