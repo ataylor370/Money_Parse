@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="- Added budget variable and spent property to the category class ( Changed category and category_manager initialization to match) &#10;- Modified transaction_number implementation (removed unique field as it conflicted with the blank) &#10;- Modified the str return for category and transaction class">
-      <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/about.html" afterDir="false" />
+    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="changed signup links">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744737664841</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="changed signup links">
+      <option name="closed" value="true" />
+      <created>1745100420344</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745100420344</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,6 +224,7 @@
     <MESSAGE value="safety check" />
     <MESSAGE value="Added kimberly's account file" />
     <MESSAGE value="- Added budget variable and spent property to the category class ( Changed category and category_manager initialization to match) &#10;- Modified transaction_number implementation (removed unique field as it conflicted with the blank) &#10;- Modified the str return for category and transaction class" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added budget variable and spent property to the category class ( Changed category and category_manager initialization to match) &#10;- Modified transaction_number implementation (removed unique field as it conflicted with the blank) &#10;- Modified the str return for category and transaction class" />
+    <MESSAGE value="changed signup links" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed signup links" />
   </component>
 </project>
