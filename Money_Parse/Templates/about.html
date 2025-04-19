@@ -15,8 +15,8 @@
 </head>
 <body>
     <img src="{% static 'img/money_parse_transparent.png' %}" alt = "MoneyParse Logo" class = "logo" >
-    <button onclick = "window.location.href = '{% url 'signup' %}'"  class = "button_main create_account_button ">Create Account</button> <!-- place link to create account form -->
-    <button onclick = "window.location.href = '{% url 'login' %}'" class = "button_main sign_in_button">Sign In</button> <!-- place link to sign in form -->
+    <button onclick = "window.location.href = '{% url 'accounts.signup' %}'"  class = "button_main create_account_button ">Create Account</button> <!-- place link to create account form -->
+    <button onclick = "window.location.href = '{% url 'accounts.login' %}'" class = "button_main sign_in_button">Sign In</button> <!-- place link to sign in form -->
     <div class = "about_textbox">
         <div class = "glassmorphic-box">
             <h2>Simplifying money management while keeping your finances secure and accessible.</h2>
