@@ -23,14 +23,15 @@
             <!-- Logic fro adding transactions -->
             <form method = "post" action = "/add-transaction/" >
                 <!-- dropdown menu for category - default text "Category -->
+                {% csrf_token %}
                 <select name="category" id="category"  class = "forms_container" required >
                     <option value="" disabled selected hidden >Category</option>
                     {% for cat in categories %}
-                        <option value="{{ cat.name }}">{{ cat.name }}</option>
+                        <option value="{{ cat.id }}">{{ cat.name }}</option>
                     {% endfor %}
                 </select>
                 <!-- text box for name - default text "Exspense" -->
-                <input type = "text" id = "description" name ="description" placeholder="Expense" class = "forms_container" required>
+                <input type = "text" id = "name" name ="name" placeholder="Expense" class = "forms_container" required>
                 <!-- (numerical) text box for amount - default text "Amount" -->
                 <input type = "number" id = "amount" name = "amount" step = "0.01" min = "0" placeholder= "Amount" class = "forms_container" required>
                 <button type = "submit" class = "forms_container-submit"> Add Transaction </button>
@@ -45,7 +46,7 @@
                 {% for t in transactions|slice:":7" %} <!-- print only the first 7 -->
                     <tr>
                         <td>{{ t.category.name }}</td>
-                        <td>{{ t.description }}</td>
+                        <td>{{ t.name }}</td>
                         <td>${{ t.amount }}</td>
                         <td>{{ t.date }}</td>
                     </tr>

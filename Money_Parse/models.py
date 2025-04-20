@@ -6,7 +6,7 @@ def get_unnamed_user():
     user, created = User.objects.get_or_create(username='unnamed')
     return user.id
 # Create your models here.
-class Transaction(models.Model): #blueprint for the transactions database
+class Transaction(models.Model):
     # Sets up relationship between transaction and user; if user is deleted, so are their transacatins
     user = models.ForeignKey(User, on_delete=models.CASCADE,default = get_unnamed_user)
     #defines database to include category, name, amount, and date fields
@@ -19,10 +19,17 @@ class Transaction(models.Model): #blueprint for the transactions database
     #saves the transaction number when transaction object is created.
     def save(self, *args, **kwargs):
         if not self.transaction_number:
-            self.transaction_number = f"T{datetime.datetime.now.strftime('%Y%m%d%H%M%S')}"
+            self.transaction_number = f"T{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}"
+        if not self.date:
+            self.date = datetime.datetime.now()
+
         super().save(*args, **kwargs) #call parent class to save to the database
     def __str__(self):
         return f'category: {self.category} name: {self.name} amount: {self.amount} date: {self.date} transaction number: {self.transaction_number}  '
+
+    class Meta:
+        verbose_name = "Transaction"
+        verbose_name_plural = "Transactions"
 
 class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
@@ -33,6 +40,9 @@ class Category(models.Model):
         return sum(t.amount for t in self.transaction_set.all())
     def __str__(self):
         return f'name: {self.name} budget: {self.budget} spent: {self.spent}'
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
 
 class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
@@ -48,13 +58,22 @@ class Goal(models.Model):
             else:
                 self.goal_number = 1  # Start from 1 for the first goal
         super().save(*args, **kwargs)
+    class Meta:
+        verbose_name = "Goal"
+        verbose_name_plural = "Goals"
 
 class Exspenses(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
     expense = models.CharField(max_length = 150)
     amount = models.DecimalField(max_digits = 10, decimal_places = 2)
+    class Meta:
+        verbose_name = "Expense"
+        verbose_name_plural = "Expenses"
 
 class Incomes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
     income = models.CharField(max_length = 150)
     amount = models.DecimalField(max_digits = 10, decimal_places = 2)
+    class Meta:
+        verbose_name = "Income"
+        verbose_name_plural = "Incomes"

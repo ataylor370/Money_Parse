@@ -10,6 +10,32 @@
     <link rel = "stylesheet" href = "{% static 'css/budget.css' %}?v=1.4" >
     <link rel = "stylesheet" href = "{% static 'css/Defaults.css' %}?v=1.4" >
     <title>Budget</title>
+
+    <title>Dynamic Donut Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Parse chart data passed from Django
+            var data = google.visualization.arrayToDataTable({{ chart_data|safe }});
+
+            var options = {
+                title: 'Spending by Category',
+                pieHole: 0.4,
+                width: 500,
+                height: 400,
+                backgroundColor: 'transparent',
+                legend: { position: 'right' },
+                pieSliceText: 'value'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donut_chart'));
+            chart.draw(data, options);
+        }
+    </script>
 </head>
 <body>
     <div class = "Goals_textbox">
@@ -43,6 +69,7 @@
     <div class = "Budget_textbox">
         <div class = "glassmorphic-box">
             <h1 class="Green_text"> Budget </h1>
+            <div id = "donut_chart"></div>
         </div>
     </div>
 

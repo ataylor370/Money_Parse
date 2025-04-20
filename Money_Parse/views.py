@@ -1,7 +1,9 @@
 from .models import Transaction, Category, Exspenses, Goal, Incomes
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-import datetime
+from django.db import models
+from django.utils import timezone
+import json
 def home(request):
      return render(request,'home.html',{})
 def about(request):
@@ -10,7 +12,12 @@ def budget(request):
     user = request.user
     categories = Category.objects.filter(user=user)
     goals = Goal.objects.filter(user=user)
-    return render(request, 'Budget.html', {'categories': categories, 'goals': goals})
+    exspenses = Exspenses.objects.filter(user=user)
+    #formatting the data for google charts api
+    chart_data = [['Category', 'Amount']]
+    for exspense in exspenses:
+        chart_data.append([exspense.expense, exspense.amount])
+    return render(request, 'Budget.html', {'categories': categories, 'goals': goals, 'chart_data': json.dumps(chart_data)})
 
 def dashboard(request):
     user = request.user
@@ -26,6 +33,7 @@ def dashboard(request):
         })
 
     return render(request, 'dashboard.html', {
+        'categories': categories,
         'transactions': transactions,
         'category_data': category_data,
     })
@@ -33,14 +41,18 @@ def dashboard(request):
 # methods for transaction database modification
 @login_required
 def create_transaction(request):
-     if request.method == "POST":
-          Transaction.objects.create(
-               user = request.user,
-               category = get_object_or_404(Category, id=request.POST['category'], user=request.user),
-               name = request.POST['name'],
-               amount = request.POST['amount'],
-               date = request.POST['date'],
-          )
+    if request.method == "POST":
+        # Create the transaction only if the method is POST
+        Transaction.objects.create(
+            user=request.user,
+            category=get_object_or_404(Category, id=request.POST['category'], user=request.user),
+            name=request.POST['name'],
+            amount=request.POST['amount'],
+        )
+
+    # Always redirect to the dashboard after handling the POST request or just accessing the page
+    return redirect('dashboard')
+
 def edit_transaction(request, transaction_number):
     transaction = get_object_or_404(Transaction, id = transaction_number, user = request.user)
     if request.method == "POST":
