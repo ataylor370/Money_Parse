@@ -42,6 +42,20 @@
 <body class="d-flex justify-content-center align-items-center" style="height: 100vh;">
   <div class="card p-4 signup-card" style="min-width: 370px;">
     <h2 class="mb-4 text-center">Create Your Money Parse Account 💸</h2>
+    {% if form.errors %}
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
     <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
