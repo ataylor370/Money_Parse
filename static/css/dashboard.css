@@ -154,3 +154,30 @@ table th, table td {
     border: thin solid var(--theme_black);
     font-size: 12px;
 }
+
+/* Dashboard card header */
+.card-header {
+    display: flex;
+    justify-content: space-between; /* pushes the button to the far right */
+    align-items: center;
+    margin-bottom: 1.5rem;          /* space between header and content */
+  }
+  
+  
+  .sandwich-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .sandwich-btn .line {
+    display: block;
+    height: 2px;
+    background-color: var(--theme_dark_green);
+    border-radius: 1px;
+  }
+  

@@ -9,5 +9,5 @@ urlpatterns = [
     path('account/', include('accounts.urls')),
     path('add-transaction/', views.create_transaction, name='add_transaction'),
     path('budget/',views.budget , name='budget'),
-
+    path('exp-transactions/',views.transaction_list, name='exp-transactions'),
 ]

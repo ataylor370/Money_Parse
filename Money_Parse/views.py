@@ -132,6 +132,14 @@ def delete_income(request, income):
     income = get_object_or_404(Incomes, id = income, user = request.user)
     if request.method == "POST":
         income.delete()
+
+@login_required
+def transaction_list(request):
+    # pull this user’s transactions, newest first
+    txns = Transaction.objects.filter(user=request.user).order_by('-date')
+    return render(request, 'transaction_list.html', {
+        'transactions': txns,
+    })
 # app/views.py
 
 
