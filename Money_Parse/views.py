@@ -1,4 +1,4 @@
-from .models import Transaction, Category, Exspenses, Goal, Incomes
+from .models import Transaction, Category, Exspenses, Goal, Income
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db import models
@@ -7,7 +7,8 @@ import json
 def home(request):
      return render(request,'home.html',{})
 def about(request):
-     return render(request, 'about.html',{}) #brackets at the end allow us to pass in stuff during render
+    request.user = None
+    return render(request, 'about.html',{}) #brackets at the end allow us to pass in stuff during render
 def budget(request):
     user = request.user
     categories = Category.objects.filter(user=user)
