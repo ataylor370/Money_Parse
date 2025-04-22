@@ -1,4 +1,4 @@
-from .models import Category, Transaction, Incomes, Exspenses, Goal
+from .models import Category, Transaction, Income, Exspenses, Goal
 from django.contrib import admin
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -10,9 +10,9 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('name', 'amount', 'date', 'category', 'user')
-@admin.register(Incomes)
+@admin.register(Income)
 class IncomeAdmin(admin.ModelAdmin):
-    list_display = ('income', 'amount', 'user')
+    list_display = ('amount', 'user')
 @admin.register(Exspenses)
 class ExpenseAdmin(admin.ModelAdmin):
     list_display = ('expense', 'amount', 'user')
