@@ -120,17 +120,17 @@ def delete_exspense(request, exspense):
 # methods for income database modification
 def create_income(request, income, amount):
     if request.method == "POST":
-        Incomes.objects.create(
+        Income.objects.create(
             user = request.user,
             income = income,
             amount = amount,
         )
 def edit_income(request, income):
-    income = get_object_or_404(Incomes, id = income, user = request.user)
+    income = get_object_or_404(Income, id = income, user = request.user)
     if request.method == "POST":
         income.amount = request.POST['amount']
 def delete_income(request, income):
-    income = get_object_or_404(Incomes, id = income, user = request.user)
+    income = get_object_or_404(Income, id = income, user = request.user)
     if request.method == "POST":
         income.delete()
 # app/views.py
