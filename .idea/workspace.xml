@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="final changes to signup links">
-      <change beforePath="$PROJECT_DIR$/Money_Parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/templates/accounts/account_initialization.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
