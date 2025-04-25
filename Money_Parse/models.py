@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.db.models import Sum
 
 def get_unnamed_user():
     user, created = User.objects.get_or_create(
@@ -47,6 +48,20 @@ class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
     name = models.CharField(max_length=150)
     budget = models.DecimalField(max_digits = 10, decimal_places = 2)
+    @property
+    def percentage(self):
+        # Safely access the user's income
+        income = self.user.income.first() if hasattr(self.user.income, 'all') else self.user.income
+        total_income = income.amount if income else Decimal('1.00')  # Avoid division by zero
+
+        total_expenses = self.user.expenses.aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
+        remaining_income = total_income - total_expenses
+
+        if remaining_income == 0:
+            return "0.00%"
+
+        percent = (self.budget / remaining_income) * 100
+        return f'{round(percent, 2)}%'
     @ property
     def spent(self):
         return sum(t.amount for t in self.transaction_set.all())
@@ -66,7 +81,7 @@ class Goal(models.Model):
         if self.number is None:
             last_goal = Goal.objects.filter(user=self.user).order_by('-number').first()
             if last_goal:
-                self.goal_number = last_goal.number + 1
+                self.number = last_goal.number + 1
             else:
                 self.number = 1  # Start from 1 for the first goal
         super().save(*args, **kwargs)
@@ -75,7 +90,7 @@ class Goal(models.Model):
         verbose_name_plural = "Goals"
 
 class Exspenses(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user, related_name='expenses')
     expense = models.CharField(max_length = 150)
     amount = models.DecimalField(max_digits = 10, decimal_places = 2)
     class Meta:

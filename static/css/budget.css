@@ -4,7 +4,9 @@ body {
 .glassmorphic-box{
     position:relative;
     width: 100% !important;               /* Make sure it stretches to the full width of the parent */
-    height: 100% !important;
+    min-height: 100%;  /* Key change - ensures it fills parent */
+    height: auto;      /* Allows growing */
+    flex-grow: 1;
 
     color:var(--theme_black);
     display: flex; /* Center text using flexbox */
@@ -31,25 +33,148 @@ body {
 }
 .Goals_textbox {
     position: absolute;
-    top: 50px;
-    left: 50px;
-    width: 350px;
-    height: 330px;
+    top: 75px;
+    left: 25px;
+    width: 325px;
+    min-height: 600px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: visible; /* Ensures content isn't clipped */
 }
 .Discretionary_textbox {
     position: absolute;
-    top: 455px;
-    left: 50px;
-    width: 350px;
-    height: 330px;
+    top: 75px;
+    left: 1005px;
+    width: 325px;
+    min-height: 600px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: visible; * Allow vertical stretching */
 }
+.income {
+    top:360px;
+    left: 880px;
+}
+
 .Budget_textbox {
     position: absolute;
-    top: 110px;
-    left: 569px;
-    width: 787px;
+    top: 75px;
+    left: 515px;
+    width: 325px;
     height: 600px;
+    padding-bottom: 35px;
 }
 .Green_text {
-    color: var(--theme_dark_green)
+    color: var(--theme_black);
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.chart {
+    position: absolute;
+    top: 155px;
+    left: 495px;
+}
+table {
+    width: 120%; /* Make sure the table takes up the full width */
+    border-collapse: collapse; /* Ensures borders are collapsed into one line */
+    table-layout: fixed; /* Ensures the columns have equal width */
+    background-color: transparent; /* Remove any background color */
+
+}
+.income-top-left {
+    position: absolute;
+    top: 25px;
+    left: 575px;
+    margin: 0;
+}
+.goal_number{
+    cursor:pointer
+}
+#donut_chart {
+    align-self: center; /* options: flex-start, center, flex-end */
+    margin-top: 20px; /* space between h1 and chart */
+}
+
+th, td {
+    padding: 10px; /* Add some padding for spacing */
+    text-align: left; /* Align text to the left for consistency */
+    font-size: 15px;
+
+}
+
+th {
+    font-weight: bold; /* Make headers stand out */
+}
+
+td {
+    word-wrap: break-word; /* Prevents long words from overflowing */
+}
+.budget_form{
+    appearance: none;
+    width: 100px;
+    height: 30px;
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+}
+select.budget_form {
+    color: #A9A9A9;
+    transition: background-color 0.5s ease;
+}
+.budget_form_submit {
+    position: relative;
+    appearance: none;
+    left: 20px;
+    width: 100px;
+    height: 30px;
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+}
+button.budget_form_category_submit:hover,
+button.budget_form_submit:hover {
+    border-style: solid !important;
+    border-width: 3px !important;
+    border-color: var(--theme_blue) !important;
+    transition: background-color 0.5s ease;
+}
+.budget_form_category{
+    appearance: none;
+    width: 75px;
+    height: 30px;
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+    font-size: 10px;
+}
+.budget_form_category_submit{
+    position: relative;
+    appearance: none;
+    left: 5px;
+    width: 85px;
+    height: 30px;
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+}
+input:focus, select:focus {
+    outline: none;
+    border-style: solid !important;
+    border-width: 3px !important;
+    border-color: var(--theme_blue) !important;
+    transition: background-color 0.3s ease;
 }

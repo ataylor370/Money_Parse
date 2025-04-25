@@ -27,7 +27,7 @@
     
             
             <!-- Logic fro adding transactions -->
-            <form method = "post" action = "/add-transaction/" >
+            <form method = "post" action = "/edit-goal/" >
                 <!-- dropdown menu for category - default text "Category -->
                 {% csrf_token %}
                 <select name="category" id="category"  class = "forms_container" required >
@@ -40,7 +40,7 @@
                 <input type = "text" id = "name" name ="name" placeholder="Expense" class = "forms_container" required>
                 <!-- (numerical) text box for amount - default text "Amount" -->
                 <input type = "number" id = "amount" name = "amount" step = "0.01" min = "0" placeholder= "Amount" class = "forms_container" required>
-                <button type = "submit" class = "forms_container-submit"> Add Transaction </button>
+                <button type = "submit" class = "forms_container-submit" style="color: #0A7A26;"> Add Transaction </button>
             </form>
 
 
@@ -62,27 +62,30 @@
         </div>
 
         <div class="card budget-card">
-            <div class="card-header">
-                <h2>Weekly Budget</h2>
-                <a href="{% url 'budget' %}"
-                   class="sandwich-btn"
-                   title="View full budget">
-                  <span class="line"></span>
-                  <span class="line"></span>
-                  <span class="line"></span>
-                </a>
-              </div>
-            {% for cat in category_data %}
-                <div class="progress-row">
-                    <div class="label">
-                        {{ cat.name }}: ${{ cat.spent }} / ${{ cat.budget }}
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: {{ cat.percent }}%;"></div>
-                    </div>
+    <div class="card-header">
+        <h2>Weekly Budget</h2>
+        <a href="{% url 'budget' %}"
+           class="sandwich-btn"
+           title="View full budget">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </a>
+    </div>
+
+    {% for cat in category_data %}
+        <div class="progress-row">
+            <div class="label">
+                {{ cat.name }}: ${{ cat.spent }} / ${{ cat.budget }}
+            </div>
+            <div class="progress-bar">
+                <div
+                    class="progress-fill {% if cat.percent > 100 %}over-budget {% elif cat.percent > 80 %}veryclose-budget{% elif cat.percent > 60 %}close-budget{% endif %}"
+                    style="width: {% if cat.percent > 100 %}100{% else %}{{ cat.percent }}{% endif %}%;">
                 </div>
-            {% endfor %}
+            </div>
         </div>
+    {% endfor %}
     </div>
 
     <div class="card tips-card">

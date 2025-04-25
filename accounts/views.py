@@ -11,7 +11,7 @@ from django.contrib import messages
 
 def signup_view(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        logout(request)
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -39,9 +39,15 @@ def account_initialization_view(request):
     if 'categories' not in request.session:
         request.session['categories'] = []
 
+    income = getattr(request.user, 'income', None)
     expenses = request.session.get('expenses', [])
     goals = request.session.get('goals', [])
     categories = request.session.get('categories', [])
+
+    total_expense_amount = sum(float(exp['amount']) for exp in expenses)
+    budget = None
+    if income:
+        budget = float(income.amount) - total_expense_amount
 
     if request.method == 'POST' and 'submit' in request.POST:
         user = request.user
@@ -74,13 +80,15 @@ def account_initialization_view(request):
     return render(request, 'accounts/account_initialization.html', {
         'expenses': expenses,
         'goals': goals,
-        'categories': categories
+        'categories': categories,
+        'income': income,
+        'budget': budget,
     })
 
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        logout(request)
 
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -114,9 +122,8 @@ def add_income_view(request):
             # user already has income
             messages.error(request, 'You have already set your income.')
         else:
-            source = request.POST.get('source')
             amount = request.POST.get('amount')
-            Income.objects.create(user=request.user, source=source, amount=amount)
+            Income.objects.create(user=request.user, amount=amount)
             messages.success(request, 'Income added successfully!')
     return redirect('accounts.account_initialization')
 def add_expense_view(request):

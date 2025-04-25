@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="final changes to signup links">
+    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="safety commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/Budget.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/Budget.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/account_initialization.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/account_initialization.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/Defaults.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/Defaults.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/budget.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/budget.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/dashboard.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745353139823</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="safety commit">
+      <option name="closed" value="true" />
+      <created>1745353648150</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1745353648150</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,8 +271,8 @@
     <MESSAGE value="- Added budget variable and spent property to the category class ( Changed category and category_manager initialization to match) &#10;- Modified transaction_number implementation (removed unique field as it conflicted with the blank) &#10;- Modified the str return for category and transaction class" />
     <MESSAGE value="changed signup links" />
     <MESSAGE value="final changes to signup links" />
-    <MESSAGE value="safety commit" />
     <MESSAGE value="recommit initialization page" />
-    <option name="LAST_COMMIT_MESSAGE" value="recommit initialization page" />
+    <MESSAGE value="safety commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="safety commit" />
   </component>
 </project>
