@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from decimal import Decimal
 import os  # For loading the environment variable
+from django.views.decorators.http import require_http_methods
+
 client = OpenAI(api_key= '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')
 def get_openai_api_key():
     try:
@@ -162,18 +164,44 @@ def create_transaction(request):
     # Always redirect to the dashboard after handling the POST request or just accessing the page
     return redirect('dashboard')
 
+
+
+@require_http_methods(["GET", "POST"])
 def edit_transaction(request, transaction_number):
-    transaction = get_object_or_404(Transaction, id = transaction_number, user = request.user)
+    txn = get_object_or_404(Transaction, id=transaction_number, user=request.user)
     if request.method == "POST":
-         transaction.category = request.POST['category']
-         transaction.name = request.POST['name']
-         transaction.amount = request.POST['amount']
-         transaction.date = request.POST['date'] #note: although the date changes the transaction number wouldn't change
+        txn.category = get_object_or_404(
+            Category,
+            id=request.POST['category'],
+            user=request.user
+        )
+        txn.name   = request.POST['name']
+        txn.amount = Decimal(request.POST['amount'])
+        if request.POST.get('date'):
+            txn.date = request.POST['date']
+        txn.save()
+        return redirect('exp-transactions')   # or 'dashboard'
+    # GET → render form
+    return render(request, 'transaction_form.html', {
+        'txn': txn,
+        'categories': Category.objects.filter(user=request.user),
+    })
+
+#def edit_transaction(request, transaction_number):
+    #transaction = get_object_or_404(Transaction, id = transaction_number, user = request.user)
+    #if request.method == "POST":
+        # transaction.category = request.POST['category']
+         #transaction.name = request.POST['name']
+         #transaction.amount = request.POST['amount']
+        # transaction.date = request.POST['date'] #note: although the date changes the transaction number wouldn't change
+
+
+
 def delete_transaction(request, transaction_number):
      transaction = get_object_or_404(Transaction, id = transaction_number, user = request.user)
      if request.method == "POST":
           transaction.delete()
-
+     return redirect('exp-transactions')
 # methods for category database modification
 def create_category(request):
     if request.method == "POST":

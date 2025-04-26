@@ -21,4 +21,14 @@ urlpatterns = [
     path('delete-expense/',views.delete_expense, name='delete-expense'),
     path('edit-income/',views.edit_income, name='edit-income'),
     path('edit-income/', views.edit_income, name='edit_income'),
+     path(
+      'transactions/<int:transaction_number>/delete/',
+      views.delete_transaction,
+      name='delete_transaction'
+    ),
+     path(
+        'transactions/<int:transaction_number>/edit/',
+        views.edit_transaction,
+        name='edit_transaction'
+    ),
 ]
