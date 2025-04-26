@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="safety commit">
+    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="Finish expnaded budgets">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/Budget.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/Budget.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Money_Parse/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Money_Parse/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Money_Parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/account_initialization.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/account_initialization.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/Defaults.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/Defaults.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/budget.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/budget.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/dashboard.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,24 +60,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.DjangoProject2.executor": "Debug",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.DjangoProject2.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Static/styles" />
@@ -136,6 +128,7 @@
       <option name="presentableId" value="Default" />
       <updated>1743616968195</updated>
       <workItem from="1743616969162" duration="33888000" />
+      <workItem from="1745631279812" duration="7038000" />
     </task>
     <task id="LOCAL-00001" summary="Base file">
       <option name="closed" value="true" />
@@ -257,7 +250,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745353648150</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Finish expnaded budgets">
+      <option name="closed" value="true" />
+      <created>1745555913365</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1745555913365</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +274,7 @@
     <MESSAGE value="final changes to signup links" />
     <MESSAGE value="recommit initialization page" />
     <MESSAGE value="safety commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="safety commit" />
+    <MESSAGE value="Finish expnaded budgets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finish expnaded budgets" />
   </component>
 </project>

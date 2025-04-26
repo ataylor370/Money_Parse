@@ -3,6 +3,8 @@ import datetime
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.db.models import Sum
+import openai
+import os
 
 def get_unnamed_user():
     user, created = User.objects.get_or_create(

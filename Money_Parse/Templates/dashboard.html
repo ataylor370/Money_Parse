@@ -91,21 +91,18 @@
     <div class="card tips-card">
         <h2>Quick tips</h2>
         <ul>
-            <li>
-                <span class="dot">*</span> You’re nearing your $300 grocery budget—plan meals and stick to a list to stay on track.
-                <span class="info-icon">i</span>
-            </li>
-            <li>
-                <span class="dot">*</span> Leisure spending is at $72.99 of $100—track expenses to avoid overspending.
-                <span class="info-icon">i</span>
-            </li>
-            <li>
-                <span class="dot">*</span> Food budget has room left at $23.47 of $55—consider reallocating or adjusting as needed.
-                <span class="info-icon">i</span>
-            </li>
+            {% if financial_advice %}
+                {% for tip in financial_advice %}
+                    <li>
+                        <span class="dot">*</span> {{ tip }}
+                        <span class="info-icon">i</span>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>No financial tips available at the moment.</li>
+            {% endif %}
         </ul>
     </div>
-
 </div>
 </body>
 </html>

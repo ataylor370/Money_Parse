@@ -1,10 +1,53 @@
-from .models import Transaction, Category, Exspenses, Goal, Income
+import openai
+  # Ensure you import openai for API calls
+from django.db.models import Sum
+from openai import OpenAI
+import json
+from .models import Transaction, Category, Exspenses, Goal, Income  # Corrected 'Exspenses' to 'Expenses'
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.db import models
 from django.utils import timezone
 from decimal import Decimal
-import json
+import os  # For loading the environment variable
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+def get_openai_api_key():
+    try:
+        # Fetch the API key from the database if it's available
+        openai_key = OpenAI.objects.first()  # Assuming the key is stored in the OpenAI model
+        if openai_key:
+              openai.api_key = openai_key.api_key# Set the API key in the OpenAI client
+        else:
+            raise ValueError("API key not found in database")
+    except Exception as e:
+        print(f"Error: {e}")
+          # Reset the API key if an error occurs
+
+def get_financial_suggestions(user):
+    # Collect relevant user data
+    income = Income.objects.filter(user=user).first()
+    expenses = Exspenses.objects.filter(user=user).aggregate(total_expenses=Sum('amount'))['total_expenses'] or 0  # Fixed typo here
+    categories = Category.objects.filter(user=user)
+    categories_data = {category.name: category.budget for category in categories}
+
+    # Create a prompt based on user data
+    prompt = f"Provide 3 bullet points of financial advice based on the following data:\nIncome: {income}\nExpenses: {expenses}\nCategories: {categories_data}"
+
+    try:
+        # Call the OpenAI API with the prompt
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a financial assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=150
+        )
+
+        advice = response.choices[0].message.content.strip()
+        return advice
+    except Exception as e:
+        print(f"Error calling OpenAI API: {e}")
+        return None
 def home(request):
      return render(request,'home.html',{})
 def about(request):
@@ -70,6 +113,8 @@ def dashboard(request):
     user = request.user
     categories = Category.objects.filter(user = user)
     transactions = Transaction.objects.filter(user=user).order_by('-date', '-id')
+    financial_advice = get_financial_suggestions(request.user)
+    financial_advice_list = financial_advice.split('\n') if financial_advice else []
 
     category_data = []
     for cat in categories:
@@ -85,7 +130,9 @@ def dashboard(request):
         'categories': categories,
         'transactions': transactions,
         'category_data': category_data,
+        'financial_advice': financial_advice_list,
     })
+
 
 # methods for transaction database modification
 @login_required
