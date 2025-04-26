@@ -45,13 +45,21 @@ def account_initialization_view(request):
     categories = request.session.get('categories', [])
 
     total_expense_amount = sum(float(exp['amount']) for exp in expenses)
-    budget = None
-    if income:
-        budget = float(income.amount) - total_expense_amount
+
+    if income is None or income.amount == 0:
+        income_amount = 1  # Avoid division by zero
+    else:
+        income_amount = float(income.amount)
+
+    # Calculate budget and remain
+    budget = income_amount - total_expense_amount
+    remain = income_amount - total_expense_amount
+
+    total_category_amount = sum(float(category['amount']) for category in categories)
+    remaining = budget - total_category_amount if budget is not None else 0
 
     if request.method == 'POST' and 'submit' in request.POST:
         user = request.user
-        # Ensure data exists before processing
         for expense_data in expenses:
             Exspenses.objects.create(
                 user=user,
@@ -69,13 +77,13 @@ def account_initialization_view(request):
                 name=category_data['category'],
                 budget=category_data['amount'],
             )
-            # Clear session after saving data
+
+        # Clear session after saving
         request.session['expenses'] = []
         request.session['goals'] = []
         request.session['categories'] = []
 
-            # Redirect after successful initialization
-        return redirect('dashboard')  # Or wherever you'd like to redirect
+        return redirect('dashboard')
 
     return render(request, 'accounts/account_initialization.html', {
         'expenses': expenses,
@@ -83,6 +91,8 @@ def account_initialization_view(request):
         'categories': categories,
         'income': income,
         'budget': budget,
+        'remaining': remaining,
+        'remain': remain,
     })
 
 
@@ -101,20 +111,18 @@ def login_view(request):
 
     return render(request, 'accounts/login.html', {'form': form})
 def logout_view(request):
-    if request.method == 'POST':
         logout(request)
-        return redirect('accounts.login')
+        return redirect('about')
 
 
 
 @login_required
-def delete_account_view(request):
+def delete_account(request):
     if request.method == 'POST':
         user = request.user
-        logout(request)
         user.delete()
-        return redirect('accounts.signup')
-    return render(request, 'accounts/delete_confirm.html')
+        logout(request)
+        return redirect('about')
 
 def add_income_view(request):
     if request.method == 'POST':

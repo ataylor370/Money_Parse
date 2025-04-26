@@ -25,12 +25,25 @@ def get_openai_api_key():
 def get_financial_suggestions(user):
     # Collect relevant user data
     income = Income.objects.filter(user=user).first()
-    expenses = Exspenses.objects.filter(user=user).aggregate(total_expenses=Sum('amount'))['total_expenses'] or 0  # Fixed typo here
+    expenses = Exspenses.objects.filter(user=user)
+    expenses_data = {expense.expense: expense.amount for expense in expenses}
+    transactions = Transaction.objects.filter(user=user).order_by('-date', '-id')
+    transactions_data = [
+        {
+            'id': transaction.id,
+            'amount': transaction.amount,
+            'date': transaction.date,
+            'name': transaction.name,
+            'category': transaction.category
+        }
+        for transaction in transactions
+    ]
     categories = Category.objects.filter(user=user)
     categories_data = {category.name: category.budget for category in categories}
 
+
     # Create a prompt based on user data
-    prompt = f"Provide 3 bullet points of financial advice based on the following data:\nIncome: {income}\nExpenses: {expenses}\nCategories: {categories_data}"
+    prompt = f"Provide 3 bullet points of financial advice based on the following data:\nIncome: {income}\nExpenses: {expenses}\nCategories: {categories_data} \nExpenses: {expenses_data} \nTransaction: {transactions_data} (ensure there is not gaps between each point)"
 
     try:
         # Call the OpenAI API with the prompt
@@ -243,7 +256,7 @@ def delete_expense(request):
 def edit_income(request):
     if request.method == "POST":
         income = get_object_or_404(Income, user=request.user)
-        income.amount = request.POST.get('amount')
+        income.amount = request.POST.get('new_income')
         income.save()
         return redirect('budget')
 
@@ -254,6 +267,7 @@ def transaction_list(request):
     return render(request, 'transaction_list.html', {
         'transactions': txns,
     })
+
 # app/views.py
 
 

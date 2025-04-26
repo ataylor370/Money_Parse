@@ -190,4 +190,30 @@ table th, table td {
     background-color: var(--theme_dark_green);
     border-radius: 1px;
   }
+  .card-lo-btn {
+            position: absolute;
+            top: 25px;
+            right: 90px;
+            width: 150px;
+            background-color: #0B8C2C; /* dark green */
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+          }
+    .card-da-btn {
+            position: absolute;
+            top: 25px;
+            right: 260px;
+            width: 150px;
+            background-color: #0B8C2C; /* dark green */
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+          }
   

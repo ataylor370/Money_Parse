@@ -68,7 +68,11 @@
       {% csrf_token %}
       <h5>Your Expenses</h5>
         {% if income %}
-            <p class="mt-2 "style="font-size: 12px;"><i>Please ensure that your total expenses do not exceed your entered monthly income ( ${{ income.amount }} ) to maintain an accurate budget.</i> </p>
+            {%if remain < 0   %}
+                <p class="mt-2 "style="font-size: 14px;color:red;"><i>Please ensure your total expense categories are less than your income ( {{ remain}} of {{ income.amount }} left )</i> </p>
+            {% else %}
+                <p class="mt-2 "style="font-size: 12px;"><i>Please ensure your total expense categories are less than your income ( {{ remain}} of {{ income.amount }} left )</i> </p>
+            {% endif %}
         {% endif %}
       <input type="text" id="expense" name="expense" placeholder="Expense Name" class="form-control" required>
       <input type="number" id="amount" name="amount" placeholder="Amount" class="form-control" required>
@@ -93,7 +97,11 @@
       {% csrf_token %}
       <h5 class="mt-4">Your Budget Categories</h5>
         {% if income and expenses %}
-            <p class="mt-2 "style="font-size: 12px;"><i>Please ensure your total category budgets are equal to your remaining income after expenses ( {{ remaining }} of {{ budget }} left)</i> </p>
+            {%if remaining < 0   %}
+                <p class="mt-2 "style="font-size: 14px;color: red!important;"><i>Please ensure your total category budgets are equal to your remaining income after expenses ( {{ remaining }} of {{ budget }} left )</i> </p>
+            {% else %}
+                <p class="mt-2 "style="font-size: 12px;"><i>Please ensure your total category budgets are equal to your remaining income after expenses ( {{ remaining }} of {{ budget }} left )</i> </p>
+            {% endif %}
         {% endif %}
       <input type="text" id="category" name="category" placeholder="Category Name" class="form-control" required>
       <input type="number" id="amount" name="amount" placeholder="Amount" class="form-control" required>

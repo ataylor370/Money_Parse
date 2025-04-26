@@ -8,10 +8,11 @@ urlpatterns = [
     path('login/', views.login_view, name='accounts.login'),
     path('logout/', views.logout_view, name='accounts.logout'),
     path('account_initialization/',views.account_initialization_view,name='accounts.account_initialization'),
-    path("delete/", views.delete_account_view, name="delete_account"),
+    path('delete_account/', views.delete_account, name='delete_account'),
     path("add-expense/", add_expense_view, name="add_expense"),
     path("add-goal/",add_goal_view, name="add_goal"),
     path("add-category/", add_category_view, name="add_category"),
     path("add-income/", add_income_view, name = "add_income"),
+
 
 ]

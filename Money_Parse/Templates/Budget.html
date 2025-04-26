@@ -79,10 +79,10 @@
 
             if (select.value === 'add-new-goal') {
                 form.action = '/create-goal/';
-                submitBtn.textContent = 'Add Goal';
+                submitBtn.textContent = 'Add';
             } else {
                 form.action = '/edit-goal/';
-                submitBtn.textContent = 'Edit Goal';
+                submitBtn.textContent = 'Edit';
             }
         }
 
@@ -142,7 +142,6 @@
         <div class = "glassmorphic-box">
             <h1 class="Green_text" style ="margin-bottom: 10px !important;"> Goals </h1>
             <h5 style="color: var(--theme_dark_green) !important; margin-bottom: 5px !important;"> Edit Budget: </h5>
-            <!--<h5 class ="Green_text"> Edit/Add Goals here: </h5> -->
             <form method="post" action="/edit-goal/" id="goal-form">
                 {% csrf_token %}
                 <select name="goal_number" id="goal_number" class="budget_form" onchange="handleGoalChange()" >
@@ -156,7 +155,7 @@
                 <input type="text" id="new_goal" name="new_goal" placeholder="New Goal" class="budget_form" required>
 
                 <button type="submit" id="goal-submit-btn" class="budget_form_submit" style="color: #0A7A26">
-                    Edit Goal
+                    Edit
                 </button>
             </form>
             <hr style="border: .5px solid #000000; margin: 10px 0;">
@@ -168,21 +167,38 @@
                         <span style="font-weight: bold;">{{ goal.number }}.</span>
                         <span style="text-align: center; flex-grow: 1;">{{ goal.goal }}</span>
                         <button type="submit"
-                                style="border: none; background: none; color: var(--theme_dark_green); font-weight: bold; font-size: 16px; cursor: pointer; z-index: 10; position: relative;">
+                                style="border: none; background: none; color: var(--theme_dark_green); font-weight: bold; font-size: 15px; cursor: pointer; z-index: 10; position: relative;">
                             &times;
                         </button>
                     </div>
                 </form>
                 <hr style="border: .5px solid #000000; margin: 10px 0;">
             {% endfor %}
-
+            <h1 class="Green_text" style ="margin-bottom: 10px !important;"> Income </h1>
+            <h5 style="color: var(--theme_dark_green) !important; margin-bottom: 5px !important;"> Edit Income: </h5>
+            <form method="post" action="/edit-income/">
+                    {% csrf_token %}
+                    <input type="text" id="new_income" name="new_income" placeholder="New Income" class="budget_form" required>
+                    <button type="submit" id="income-submit-btn" class="budget_form_submit" style="color: #0A7A26; left: 120px !important;">
+                        Edit
+                    </button>
+            </form>
+            <hr style="border: .5px solid #000000; margin: 10px 0;">
+            <div style="font-size: 15px; display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 0;">
+                <span style="font-weight: bold;">Current Income: </span>
+                <span style="text-align: right; flex-grow: 1;">${{ income.amount }}</span>
+            </div>
         </div>
     </div>
     <div class = "Discretionary_textbox">
         <div class = "glassmorphic-box">
             <h1 class="Green_text" style="margin-bottom: 10px !important;">Budget</h1>
             <h5 style="color: var(--theme_dark_green) !important; margin-bottom: 5px !important;"> Edit Budget: </h5>
-            <p class="mt-2 "style="font-size: 10px;"><i>Please ensure your total category budgets are equal to your remaining income after expenses ( {{ remaining }} of {{ budget }} left )</i> </p>
+            {%if remaining < 0   %}
+                <p class="mt-2 "style="font-size: 12px;color: red!important;"><i>Please ensure your total category budgets are equal to your remaining income after expenses ( {{ remaining }} of {{ budget }} left )</i> </p>
+            {% else %}
+                <p class="mt-2 "style="font-size: 10px;"><i>Please ensure your total category budgets are equal to your remaining income after expenses ( {{ remaining }} of {{ budget }} left )</i> </p>
+            {% endif %}
             <form method="post" action="/edit-category/" id="category-form">
                 {% csrf_token %}
 
@@ -250,7 +266,11 @@
         <div class = "glassmorphic-box">
             <h1 class="Green_text" style="margin-bottom: 10px !important;"> Expenses </h1>
             <h5 style="color: var(--theme_dark_green) !important; margin-bottom: 5px !important;"> Edit Expenses: </h5>
-            <p class="mt-2 "style="font-size: 10px;"><i>Please ensure your total expense categories are less than your income ( {{ remain}} of {{ income.amount }} left )</i> </p>
+            {%if remain < 0   %}
+                <p class="mt-2 "style="font-size: 12px;color:red;"><i>Please ensure your total expense categories are less than your income ( {{ remain}} of {{ income.amount }} left )</i> </p>
+            {% else %}
+                <p class="mt-2 "style="font-size: 10px;"><i>Please ensure your total expense categories are less than your income ( {{ remain}} of {{ income.amount }} left )</i> </p>
+            {% endif %}
             <form method="post" action="/edit-expense/" id="expense-form">
             {% csrf_token %}
 
