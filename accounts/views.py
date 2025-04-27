@@ -1,12 +1,19 @@
-from django.http import JsonResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
+
+from django.contrib.auth import login, logout,authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile
 from Money_Parse.models import Exspenses,Category,Goal,Income
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ForgotPasswordForm
 from django.contrib import messages
+from django.contrib.auth.hashers import make_password
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import SecurityQuestionsForm, ResetPasswordForm
+from .models import SecurityQuestions
+import random
+
+from django.contrib.auth.models import User
+from .forms import UserCreationForm, SecurityQuestionsForm
+
 
 
 def signup_view(request):
@@ -15,21 +22,31 @@ def signup_view(request):
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
+        security_form = SecurityQuestionsForm(request.POST)
+        if form.is_valid() and security_form.is_valid():
+            # Save the user from the custom user creation form
             user = form.save()
-            login(request, user)
 
-            # Initialize session variables
+            # Create the security questions object, assign the user, then save
+            security_questions = security_form.save(commit=False)
+            security_questions.user = user
+            security_questions.save()
+
+            # Optionally initialize session variables, log in the user, etc.
+            login(request, user)
             request.session['expenses'] = []
             request.session['goals'] = []
             request.session['categories'] = []
 
             return redirect('accounts.account_initialization')
-
     else:
         form = CustomUserCreationForm()
+        security_form = SecurityQuestionsForm()
 
-    return render(request, 'accounts/signup.html', {'form': form})
+    return render(request, 'accounts/signup.html', {
+        'form': form,
+        'security_form': security_form,
+    })
 
 def account_initialization_view(request):
     if 'expenses' not in request.session:
@@ -171,3 +188,81 @@ def add_goal_view(request):
         request.session.modified = True  # Ensure the session is updated
 
     return redirect('accounts.account_initialization')
+
+def forgot_password(request):
+    if request.method == 'POST':
+        username = request.POST.get('user')
+        if not username:
+            # If username is missing, redirect to login
+            username = request.session.get('username')
+        if not username:
+            # If username is missing, redirect to login
+            return redirect('accounts.login')
+
+        # Store the username in session
+        request.session['username'] = username  # Save username to session
+
+        form = SecurityQuestionsForm(request.POST)
+
+        if form.is_valid():
+            # Retrieve username from session
+            username = request.session.get('username')
+            # Retrieve the username from session
+              # Replace with actual view name if needed
+            answer_1 = form.cleaned_data['answer_1']
+            answer_2 = form.cleaned_data['answer_2']
+            print(answer_1, answer_2)
+
+            try:
+                user = User.objects.get(username=username)
+                print(user.username)
+                security = SecurityQuestions.objects.get(user=user)
+
+                # Randomly select question 1 or 2
+                question_number = random.choice([1, 2])
+                request.session['question_number'] = question_number  # Store the selected question
+
+                # Compare the user's answer with the correct answer
+                correct_answer = security.answer_1 if question_number == 1 else security.answer_2
+                user_answer = answer_1 if question_number == 1 else answer_2
+
+                if user_answer.strip().lower() == correct_answer.strip().lower():
+                    # Answer is correct, redirect to reset password
+                    return redirect('reset_password')  # Ensure this view exists
+
+                else:
+                    # Incorrect answer
+                    error = "Incorrect answer. Please try again."
+                    return render(request, 'accounts/forgot_password.html', {
+                        'form': form,
+                        'error': error
+                    })
+            except (User.DoesNotExist, SecurityQuestions.DoesNotExist):
+                form.add_error('answer_1', "Invalid username or security answers.")
+
+    else:
+        form = SecurityQuestionsForm()
+
+    return render(request, 'accounts/forgot_password.html', {'form': form})
+
+def reset_password(request):
+    # Get the username from the session
+    username = request.session.get('username')
+
+    if not username:
+        return redirect('forgot_password')  # If no username is in the session, redirect back to forgot password
+
+    user = get_object_or_404(User, username=username)
+
+    if request.method == 'POST':
+        form = ResetPasswordForm(request.POST)
+        if form.is_valid():
+            # Update the password for the user
+            user.password = make_password(form.cleaned_data['new_password1'])
+            user.save()
+            messages.success(request, "Your password has been reset successfully.")
+            return redirect('accounts.login')  # Redirect to login after successful password reset
+    else:
+        form = ResetPasswordForm()
+
+    return render(request, 'accounts/reset_password.html', {'form': form})

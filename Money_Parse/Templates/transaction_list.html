@@ -49,10 +49,15 @@
     border: none;
     border-radius: 20px;
     padding: 0.4rem 0.8rem;
+      height: 5px;
   }
   .transactions-controls .search-input {
     width: 200px;
-    border: none;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 20px;
+    height: 35px;
+    padding: 0 0.75rem;
   }
   .transactions-controls .small-select {
     background: #FFFFFF;
@@ -101,25 +106,31 @@
         </button>
 
         <!-- Header -->
-        <div class="transactions-header">
-          <h2>Transactions</h2>
-          <div class="transactions-controls">
-            <div class="date-range">
-              <input type="date" name="start_date" value="{{ start_date }}" class="date-input">
+        <form method="get" action="{% url 'exp-transactions' %}">
+          <div class="transactions-controls" style="display: flex; align-items: center; gap: 0.5rem;">
+
+            <div class="date-range" style="display: flex; align-items: center; gap: 0.25rem;">
+              <input type="date" name="start_date" value="{{ request.GET.start_date }}" class="date-input">
               <span>to</span>
-              <input type="date" name="end_date" value="{{ end_date }}" class="date-input">
+              <input type="date" name="end_date" value="{{ request.GET.end_date }}" class="date-input">
             </div>
-            <input type="text" name="q" placeholder="Search" class="search-input">
+
+            <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}" class="search-input">
+
             <select name="alpha_order" class="forms_container small-select">
-              <option value="asc">A–Z</option>
-              <option value="desc">Z–A</option>
+              <option value="asc" {% if request.GET.alpha_order == "asc" %}selected{% endif %}>A–Z</option>
+              <option value="desc" {% if request.GET.alpha_order == "desc" %}selected{% endif %}>Z–A</option>
             </select>
+
             <select name="sort_by" class="forms_container small-select">
-              <option value="date">Sort By Date</option>
-              <option value="amount">Sort By Amount</option>
+              <option value="date" {% if request.GET.sort_by == "date" %}selected{% endif %}>Sort By Date</option>
+              <option value="amount" {% if request.GET.sort_by == "amount" %}selected{% endif %}>Sort By Amount</option>
             </select>
+
+            <button type="submit">Apply Filters</button>
+
           </div>
-        </div>
+        </form>
 
         <!-- Table -->
         <div class="table-wrapper">

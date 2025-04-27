@@ -13,3 +13,12 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
+class SecurityQuestions(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    question_1 = models.CharField(max_length=255)
+    answer_1 = models.CharField(max_length=255)
+    question_2 = models.CharField(max_length=255)
+    answer_2 = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"Security Questions for {self.user.username}"

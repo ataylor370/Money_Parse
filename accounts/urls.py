@@ -13,6 +13,8 @@ urlpatterns = [
     path("add-goal/",add_goal_view, name="add_goal"),
     path("add-category/", add_category_view, name="add_category"),
     path("add-income/", add_income_view, name = "add_income"),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('accounts/reset-password/', views.reset_password, name='reset_password'),
 
 
 ]

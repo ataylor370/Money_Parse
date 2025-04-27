@@ -1,6 +1,6 @@
 import openai
   # Ensure you import openai for API calls
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from openai import OpenAI
 import json
 from .models import Transaction, Category, Exspenses, Goal, Income  # Corrected 'Exspenses' to 'Expenses'
@@ -290,8 +290,42 @@ def edit_income(request):
 
 @login_required
 def transaction_list(request):
-    # pull this user’s transactions, newest first
-    txns = Transaction.objects.filter(user=request.user).order_by('-date')
+    # Start with all this user's transactions, newest first
+    txns = Transaction.objects.filter(user=request.user)
+
+    # Get filter values from the GET request
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    query = request.GET.get('q')
+    alpha_order = request.GET.get('alpha_order')
+    sort_by = request.GET.get('sort_by')
+
+    # Apply start and end date filtering
+    if start_date:
+        txns = txns.filter(date__gte=start_date)
+    if end_date:
+        txns = txns.filter(date__lte=end_date)
+
+    # Apply text search on the transaction name or description
+    if query:
+        txns = txns.filter(
+            Q(name__icontains=query) |
+            Q(category__name__icontains=query)
+        )
+
+    # Apply alphabetical order (A–Z or Z–A) on name
+    if alpha_order == 'asc':
+        txns = txns.order_by('name')
+    elif alpha_order == 'desc':
+        txns = txns.order_by('-name')
+
+    # Sort by date or amount (only if no alpha_order given)
+    if not alpha_order:
+        if sort_by == 'date':
+            txns = txns.order_by('-date')
+        elif sort_by == 'amount':
+            txns = txns.order_by('-amount')
+
     return render(request, 'transaction_list.html', {
         'transactions': txns,
     })
