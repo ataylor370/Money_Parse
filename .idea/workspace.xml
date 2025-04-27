@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="slight tweaks">
-      <change afterPath="$PROJECT_DIR$/accounts/templates/accounts/forgot_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/accounts/templates/accounts/reset_password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/transaction_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/transaction_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Money_Parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/Budget.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/Budget.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +27,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/refine-signup" />
+    <option name="BRANCH" value="origin/dashboard-branch" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -75,7 +65,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dashboard-branch",
+    "git-widget-placeholder": "main",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -282,7 +272,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745679134379</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add reset password">
+      <option name="closed" value="true" />
+      <created>1745728030086</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1745728030086</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,7 +299,8 @@
     <MESSAGE value="Finish expnaded budgets" />
     <MESSAGE value="Added AI" />
     <MESSAGE value="Put Key in open directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Put Key in open directory" />
+    <MESSAGE value="add reset password" />
+    <option name="LAST_COMMIT_MESSAGE" value="add reset password" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
