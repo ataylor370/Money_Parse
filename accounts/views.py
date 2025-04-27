@@ -13,6 +13,7 @@ import random
 
 from django.contrib.auth.models import User
 from .forms import UserCreationForm, SecurityQuestionsForm
+from Money_Parse.factories import TransactionFactory, CategoryFactory, GoalFactory, ExpenseFactory, IncomeFactory
 
 
 
@@ -78,22 +79,16 @@ def account_initialization_view(request):
     if request.method == 'POST' and 'submit' in request.POST:
         user = request.user
         for expense_data in expenses:
-            Exspenses.objects.create(
-                user=user,
-                expense=expense_data['expense'],
-                amount=expense_data['amount']
-            )
+            expense = expense_data['expense']
+            amount = expense_data['amount']
+            ExpenseFactory.create_expense(user, expense, amount)
         for goal_data in goals:
-            Goal.objects.create(
-                user=user,
-                goal=goal_data['goal'],
-            )
+            goal = goal_data['goal']
+            GoalFactory.create_goal(user,goal)
         for category_data in categories:
-            Category.objects.create(
-                user=user,
-                name=category_data['category'],
-                budget=category_data['amount'],
-            )
+            name = category_data['category']
+            budget = category_data['amount']
+            CategoryFactory.create_category(user,name,budget)
 
         # Clear session after saving
         request.session['expenses'] = []
@@ -148,7 +143,8 @@ def add_income_view(request):
             messages.error(request, 'You have already set your income.')
         else:
             amount = request.POST.get('amount')
-            Income.objects.create(user=request.user, amount=amount)
+            user = request.user
+            IncomeFactory.create_income(user, amount)
             messages.success(request, 'Income added successfully!')
     return redirect('accounts.account_initialization')
 def add_expense_view(request):

@@ -6,6 +6,9 @@ from django.db.models import Sum
 import openai
 import os
 
+from openai import OpenAI
+
+
 def get_unnamed_user():
     user, created = User.objects.get_or_create(
         username='unnamed',
@@ -105,3 +108,24 @@ class Income(models.Model):
     class Meta:
         verbose_name = "Income"
         verbose_name_plural = "Income"
+class OpenAIClient:
+    _instance = None
+    _api_key = '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'
+
+    def __init__(self):
+        # Set the API key in the OpenAI client
+        openai.api_key = self._api_key
+
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            cls._instance = OpenAIClient()  # The instance is created with the API key already set
+        return cls._instance
+
+    @property
+    def chat(self):
+        # Delegate the chat functionality to the openai module
+        return openai.chat
+
+    def get_api_key(self):
+        return self._api_key
