@@ -1,6 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.utils import ErrorList
+from django.template.context_processors import request
 from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
+from django import forms
+
 
 class CustomErrorList(ErrorList):
     def __str__(self):
@@ -16,3 +20,10 @@ class CustomUserCreationForm(UserCreationForm):
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
             self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
+
+
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2']
+
+

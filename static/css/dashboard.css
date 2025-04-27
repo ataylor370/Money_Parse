@@ -55,6 +55,7 @@ body {
     padding-right: 13px;
     border-radius: 40px;
     border: none;
+
     background-color: white;
 }
 /* makes the placeholder text grey */
@@ -113,9 +114,18 @@ table th, table td {
 }
 
 .progress-fill {
-    background: linear-gradient(to right, var(--theme_dark_green), var(--theme_blue));
+    background: linear-gradient(to right, var(--theme_blue), var(--theme_dark_green));
     height: 100%;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
+}
+.progress-fill.close-budget {
+    background: linear-gradient(to right, var(--theme_blue), orange); /* red if over 100% */
+}
+.progress-fill.veryclose-budget {
+    background: linear-gradient(to right, var(--theme_blue), #FF6A00); /* red if over 100% */
+}
+.progress-fill.over-budget {
+    background: linear-gradient(to right, var(--theme_blue), red); /* red if over 100% */
 }
 
 .tips-card ul {
@@ -180,4 +190,30 @@ table th, table td {
     background-color: var(--theme_dark_green);
     border-radius: 1px;
   }
+  .card-lo-btn {
+            position: absolute;
+            top: 25px;
+            right: 90px;
+            width: 150px;
+            background-color: #0B8C2C; /* dark green */
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+          }
+    .card-da-btn {
+            position: absolute;
+            top: 25px;
+            right: 260px;
+            width: 150px;
+            background-color: #0B8C2C; /* dark green */
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+          }
   

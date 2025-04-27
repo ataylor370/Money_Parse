@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="final changes to signup links">
+    <list default="true" id="561e7dea-93c1-404a-bc5d-15323cc61699" name="Changes" comment="Put Key in open directory">
+      <change afterPath="$PROJECT_DIR$/accounts/templates/accounts/delete_account_confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/Budget.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/Budget.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/Templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/Templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Money_Parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Money_Parse/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/account_initialization.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/account_initialization.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/dashboard.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,13 +29,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/expanded_budget" />
+    <option name="BRANCH" value="origin/refine-signup" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -56,24 +66,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.DjangoProject2.executor": "Debug",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.DjangoProject2.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Static/styles" />
@@ -124,6 +134,7 @@
       <option name="presentableId" value="Default" />
       <updated>1743616968195</updated>
       <workItem from="1743616969162" duration="33888000" />
+      <workItem from="1745631279812" duration="16448000" />
     </task>
     <task id="LOCAL-00001" summary="Base file">
       <option name="closed" value="true" />
@@ -221,7 +232,55 @@
       <option name="project" value="LOCAL" />
       <updated>1745100761135</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="safety commit">
+      <option name="closed" value="true" />
+      <created>1745352548094</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745352548094</updated>
+    </task>
+    <task id="LOCAL-00014" summary="recommit initialization page">
+      <option name="closed" value="true" />
+      <created>1745353139823</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745353139823</updated>
+    </task>
+    <task id="LOCAL-00015" summary="safety commit">
+      <option name="closed" value="true" />
+      <created>1745353648150</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1745353648150</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Finish expnaded budgets">
+      <option name="closed" value="true" />
+      <created>1745555913365</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1745555913365</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Added AI">
+      <option name="closed" value="true" />
+      <created>1745638734811</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1745638734811</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Put Key in open directory">
+      <option name="closed" value="true" />
+      <created>1745679134379</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1745679134379</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,6 +294,11 @@
     <MESSAGE value="- Added budget variable and spent property to the category class ( Changed category and category_manager initialization to match) &#10;- Modified transaction_number implementation (removed unique field as it conflicted with the blank) &#10;- Modified the str return for category and transaction class" />
     <MESSAGE value="changed signup links" />
     <MESSAGE value="final changes to signup links" />
-    <option name="LAST_COMMIT_MESSAGE" value="final changes to signup links" />
+    <MESSAGE value="recommit initialization page" />
+    <MESSAGE value="safety commit" />
+    <MESSAGE value="Finish expnaded budgets" />
+    <MESSAGE value="Added AI" />
+    <MESSAGE value="Put Key in open directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="Put Key in open directory" />
   </component>
 </project>

@@ -1,9 +1,24 @@
 from django.db import models
 import datetime
 from django.contrib.auth.models import User
+from django.utils.timezone import now
+from django.db.models import Sum
+import openai
+import os
 
 def get_unnamed_user():
-    user, created = User.objects.get_or_create(username='unnamed')
+    user, created = User.objects.get_or_create(
+        username='unnamed',
+        defaults={
+            'email': 'unnamed@example.com',
+            'password': '',  # Unusable password; can use User.set_unusable_password() later
+            'last_login': now(),
+            'date_joined': now(),
+            'is_active': False,
+            'is_staff': False,
+            'is_superuser': False,
+        }
+    )
     return user.id
 # Create your models here.
 class Transaction(models.Model):
@@ -35,6 +50,20 @@ class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
     name = models.CharField(max_length=150)
     budget = models.DecimalField(max_digits = 10, decimal_places = 2)
+    @property
+    def percentage(self):
+        # Safely access the user's income
+        income = self.user.income.first() if hasattr(self.user.income, 'all') else self.user.income
+        total_income = income.amount if income else Decimal('1.00')  # Avoid division by zero
+
+        total_expenses = self.user.expenses.aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
+        remaining_income = total_income - total_expenses
+
+        if remaining_income == 0:
+            return "0.00%"
+
+        percent = (self.budget / remaining_income) * 100
+        return f'{round(percent, 2)}%'
     @ property
     def spent(self):
         return sum(t.amount for t in self.transaction_set.all())
@@ -51,29 +80,28 @@ class Goal(models.Model):
     #creating an incrementing goal number for each goal
     def save(self, *args, **kwargs):
         # If it's a new goal, set the goal_number
-        if self.goal_number is None:
-            last_goal = Goal.objects.filter(user=self.user).order_by('-goal_number').first()
+        if self.number is None:
+            last_goal = Goal.objects.filter(user=self.user).order_by('-number').first()
             if last_goal:
-                self.goal_number = last_goal.goal_number + 1
+                self.number = last_goal.number + 1
             else:
-                self.goal_number = 1  # Start from 1 for the first goal
+                self.number = 1  # Start from 1 for the first goal
         super().save(*args, **kwargs)
     class Meta:
         verbose_name = "Goal"
         verbose_name_plural = "Goals"
 
 class Exspenses(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user, related_name='expenses')
     expense = models.CharField(max_length = 150)
     amount = models.DecimalField(max_digits = 10, decimal_places = 2)
     class Meta:
         verbose_name = "Expense"
         verbose_name_plural = "Expenses"
 
-class Incomes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=get_unnamed_user)
-    income = models.CharField(max_length = 150)
+class Income(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # ensures only one income per user
     amount = models.DecimalField(max_digits = 10, decimal_places = 2)
     class Meta:
         verbose_name = "Income"
-        verbose_name_plural = "Incomes"
+        verbose_name_plural = "Income"
