@@ -272,7 +272,7 @@ def decimal_default(obj):
     if isinstance(obj, Decimal):
         return float(obj)  # or return str(obj) if you prefer to serialize as a string
     raise TypeError("Type not serializable")
-client = OpenAI(api_key= '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')
+client = OpenAI(api_key = os.getenv("OPENAI_API_KEY"))
           # Reset the API key if an error occurs
 def get_financial_suggestions(user):
     # First, ensure the OpenAIClient is initialized
