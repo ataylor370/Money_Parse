@@ -297,7 +297,7 @@ def get_financial_suggestions(user):
     categories_data = {category.name: category.budget for category in categories}
 
     # Create a prompt based on user data
-    prompt = f"Provide 3 bullet points of financial advice specific to my transactions, expenses, income, categories provided in the following data:\nIncome: {income}\nExpenses: {expenses}\nCategories: {categories_data} \nExpenses: {expenses_data} \nTransaction: {transactions_data} (ensure there is not gaps between each point)"
+    prompt = f"Provide 3 bullet points of financial advice specific to my transactions, expenses, income, categories provided in the following data:\nIncome: {income}\nExpenses: {expenses}\nCategories: {categories_data} \nExpenses: {expenses_data} \nTransaction: {transactions_data} "
 
     try:
         # Call the OpenAI API with the prompt using the singleton instance
