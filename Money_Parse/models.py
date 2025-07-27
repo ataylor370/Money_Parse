@@ -110,10 +110,9 @@ class Income(models.Model):
         verbose_name_plural = "Income"
 class OpenAIClient:
     _instance = None
-    _api_key = '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'
-
     def __init__(self):
         # Set the API key in the OpenAI client
+        self._api_key = os.getenv("OPENAI_API_KEY")
         openai.api_key = self._api_key
 
     @classmethod
